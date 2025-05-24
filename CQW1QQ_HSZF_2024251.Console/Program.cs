@@ -15,9 +15,43 @@ namespace CQW1QQ_HSZF_2024251.Console
     {
         public static int Main(string[] args)
         {
-           
+            var app = new CommandApp(RegisterServices());
+            app.Configure(config => ConfigureCommands(config));
+
+            return app.Run(args);
         }
 
-       
+        private static ITypeRegistrar RegisterServices()
+        {
+            var services = new ServiceCollection();
+
+            services.AddSingleton<IFridgeRepository, FridgeRepository>();
+            services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddSingleton<IPersonRepository, PersonRepository>();
+            services.AddSingleton<IPantryRepository, PantryRepository>();
+
+            services.AddSingleton<IStorageService, StorageService>();
+            services.AddSingleton<IProductService, ProductService>();
+
+            services.AddSingleton<DbContext, HouseholdDbContext>();
+
+            services.AddDbContext<HouseholdDbContext>();
+
+            return new TypeRegistrar(services);
+        }
+        private static IConfigurator ConfigureCommands(IConfigurator config)
+        {
+            config.CaseSensitivity(CaseSensitivity.None);
+            config.SetApplicationName("Household Database");
+            config.ValidateExamples();
+
+            config.AddCommand<StartCommand>("start")
+                .WithDescription("This command starts the application.");
+
+
+            return config;
+        }
     }
+
+}
 }
