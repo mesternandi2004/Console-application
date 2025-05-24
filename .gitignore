@@ -1,0 +1,43 @@
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build output
+bin/
+obj/
+out/
+
+## Paket
+.paket/
+paket-files/
+
+## Rider
+.idea/
+*.sln.iml
+
+## DotCover
+*.dcvr
+
+## Test results
+TestResults/
+*.log
+
+## Entity Framework Migrations
+Migrations/
+
+## User secrets
+secrets.json
+
+## Other
+*.DS_Store
+*.swp
+*.bak
+*.tmp
+*.cache
+*.dbmdl
+
+## Logs
+*.log
